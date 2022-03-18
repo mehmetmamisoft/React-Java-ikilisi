@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
 import { ProductService } from "../services/productService";
 export default function ProductList() {
@@ -10,11 +10,12 @@ export default function ProductList() {
   //comp yüklendiğinde yapılöası istediğin kodu buraya yapıştır
 
   useEffect(() => {
-
     //burda get al promise döndürüyo başarılı then başarısız olursa  catch
-    let productService=new ProductService()
-    productService.getProducts().then(result=>setProducts(result.data.data))
-  })
+    let productService = new ProductService();
+    productService
+      .getProducts()
+      .then((result) => setProducts(result.data.data));
+  },[]);
   return (
     <div>
       <Table celled>
