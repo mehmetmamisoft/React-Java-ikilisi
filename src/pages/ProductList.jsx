@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Icon, Menu, Table } from "semantic-ui-react";
 import { ProductService } from "../services/productService";
 export default function ProductList() {
@@ -6,6 +7,7 @@ export default function ProductList() {
   //soldaki yapı destructor içinde data sağdaki fonksiyon!
   //defaultu boş bir array! initiali yani başlangıcı boş array
   //lifecycle hooks'dur
+  //servisden sonra hemen buraya gel gare
   const [products, setProducts] = useState([]);
   //comp yüklendiğinde yapılöası istediğin kodu buraya yapıştır
 
@@ -29,12 +31,13 @@ export default function ProductList() {
           </Table.Row>
         </Table.Header>
 
+{/* backtick //"dfsw"+"few" */}
         <Table.Body>
           {
             //array içi products map et jsx'e gel
             products.map((product) => (
               <Table.Row key={product.id}>
-                <Table.Cell>{product.productName}</Table.Cell>
+                <Table.Cell><Link to={`/products/${product.productName}`}>{product.productName}</Link></Table.Cell>
                 <Table.Cell>{product.unitPrice}</Table.Cell>
                 <Table.Cell>{product.unitsInStock}</Table.Cell>
                 <Table.Cell>{product.quantityPerUnit}</Table.Cell>

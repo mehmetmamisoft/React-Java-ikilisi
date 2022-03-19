@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Container, Menu } from "semantic-ui-react";
 import CartSummary from "./CartSummary";
 import SignedIn from "./SignedIn";
@@ -9,11 +10,13 @@ export default function Navi() {
   //destructed yapıyık
   //setis state değiştircez isauthenticated değişsin
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-
+ const history=useHistory()
   //handle çıkış yap oluyor burda
   //state navide kullan ama altcomponentden çağırmak lazum fonk ile
   function handleSignOut() {
     setIsAuthenticated(false)
+    history.push("/")
+
   }
 
    //handle giriş yap oluyor burda
