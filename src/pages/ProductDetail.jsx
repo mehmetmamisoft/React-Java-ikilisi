@@ -5,7 +5,7 @@ import { ProductService } from "../services/productService";
 
 export default function ProductDetail() {
   let { name } = useParams();
-  //ilk değeri object burda sebei tek değer diğerinde array
+  //ilk değeri object burda sebebi tek değer diğerinde array
   const [product, setProduct] = useState({});
 
   React.useEffect(() => {
