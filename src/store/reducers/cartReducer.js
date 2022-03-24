@@ -3,8 +3,8 @@ import { cartItems } from "../initialValues/cartItems";
 
 const initialState = {
   cartItems: cartItems,
-  x:1,
-  y:2
+  // x:1,
+  // y:2
 };
 
 export default function cartReducer(state = initialState, { type, payload }) {
