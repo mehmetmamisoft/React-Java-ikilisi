@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Icon, Menu, Table } from "semantic-ui-react";
 import { ProductService } from "../services/productService";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/actions/cartActions";
 export default function ProductList() {
   //const [state, setstate] = useState(initialState);
   //soldaki yapı destructor içinde data sağdaki fonksiyon!
@@ -10,11 +11,11 @@ export default function ProductList() {
   //lifecycle hooks'dur
 
   //burasu reeducr'dan sonra geldi
-//dispatch aksyionaları
-//reflectionla beraber fonk çağırmak istiyoruz
-//buton ekle aksiyonu çağır
+  //dispatch aksyionaları
+  //reflectionla beraber fonk çağırmak istiyoruz
+  //buton ekle aksiyonu çağır
 
-  const dispatch= useDispatch()
+  const dispatch = useDispatch();
   //servisden sonra hemen buraya gel gare
   const [products, setProducts] = useState([]);
   //comp yüklendiğinde yapılöası istediğin kodu buraya yapıştır
@@ -25,14 +26,12 @@ export default function ProductList() {
     productService
       .getProducts()
       .then((result) => setProducts(result.data.data));
-  },[]);
+  }, []);
 
-  const handleAddToCart=(product)=>{
-        
-     dispatch(addToCart())
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
 
-  }
-  
   return (
     <div>
       <Table celled>
@@ -47,18 +46,26 @@ export default function ProductList() {
           </Table.Row>
         </Table.Header>
 
-{/* backtick //"dfsw"+"few" */}
+        {/* backtick //"dfsw"+"few" */}
         <Table.Body>
           {
             //array içi products map et jsx'e gel
             products.map((product) => (
               <Table.Row key={product.id}>
-                <Table.Cell><Link to={`/products/${product.productName}`}>{product.productName}</Link></Table.Cell>
+                <Table.Cell>
+                  <Link to={`/products/${product.productName}`}>
+                    {product.productName}
+                  </Link>
+                </Table.Cell>
                 <Table.Cell>{product.unitPrice}</Table.Cell>
                 <Table.Cell>{product.unitsInStock}</Table.Cell>
                 <Table.Cell>{product.quantityPerUnit}</Table.Cell>
                 <Table.Cell>{product.category.categoryName}</Table.Cell>
-                <Table.Cell><Button onClick={}></Button></Table.Cell>
+                <Table.Cell>
+                  <Button onClick={() => handleAddToCart(product)}>
+                    Sepete ekle
+                  </Button>
+                </Table.Cell>
               </Table.Row>
             ))
           }
