@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Icon, Menu, Table } from "semantic-ui-react";
+import { Button, Icon, Menu, Table } from "semantic-ui-react";
 import { ProductService } from "../services/productService";
 export default function ProductList() {
   //const [state, setstate] = useState(initialState);
   //soldaki yapı destructor içinde data sağdaki fonksiyon!
   //defaultu boş bir array! initiali yani başlangıcı boş array
   //lifecycle hooks'dur
+
+  //burasu reeducr'dan sonra geldi
+//dispatch aksyionaları
+//reflectionla beraber fonk çağırmak istiyoruz
+//buton ekle aksiyonu çağır
+
+  const dispatch= useDispatch()
   //servisden sonra hemen buraya gel gare
   const [products, setProducts] = useState([]);
   //comp yüklendiğinde yapılöası istediğin kodu buraya yapıştır
@@ -18,6 +26,13 @@ export default function ProductList() {
       .getProducts()
       .then((result) => setProducts(result.data.data));
   },[]);
+
+  const handleAddToCart=(product)=>{
+        
+     dispatch(addToCart())
+
+  }
+  
   return (
     <div>
       <Table celled>
@@ -28,6 +43,7 @@ export default function ProductList() {
             <Table.HeaderCell>Stok Adeti</Table.HeaderCell>
             <Table.HeaderCell>Açıklama</Table.HeaderCell>
             <Table.HeaderCell>Kategori Adı</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -42,6 +58,7 @@ export default function ProductList() {
                 <Table.Cell>{product.unitsInStock}</Table.Cell>
                 <Table.Cell>{product.quantityPerUnit}</Table.Cell>
                 <Table.Cell>{product.category.categoryName}</Table.Cell>
+                <Table.Cell><Button onClick={}></Button></Table.Cell>
               </Table.Row>
             ))
           }
