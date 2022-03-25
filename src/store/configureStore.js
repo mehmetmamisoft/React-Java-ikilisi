@@ -11,6 +11,7 @@ export function configureStore() {
   //return createStore(rootReducers, applyMiddleware(thunk))
 
   //redux devtools chrome ekleduk devtoolenhancer kaldırabilirsin
+  //create store redux store oluşturan fonksiyondur heberin olsun!
   return createStore(rootReducer,devToolsEnhancer())
 
 }
